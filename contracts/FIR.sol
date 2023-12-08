@@ -85,4 +85,27 @@ contract Complaint {
         officer = _address;
         emit OfficerChanged(_address);
     }
+     function resolve(uint _id, string memory _resolveStatement) public onlyOfficer returns (string memory){
+        ComplaintData storage currentComplaint = alltheComplaints[_id];
+        require (currentComplaint.exists, "Complaint does not exist");
+        require (currentComplaint.resolved == false, "complaint is already resolved");
+        currentComplaint.resolved = true;
+        emit ComplaintResolved(_id, _resolveStatement);
+
+        return "Case Resolved!";
+    }
+
+    function addEvidence(uint _id, string memory _evidence) public onlyOfficer {
+        ComplaintData storage currentComplaint = alltheComplaints[_id];
+        require(currentComplaint.exists, "Complaint does not exist");
+        currentComplaint.evidence = string(abi.encodePacked(currentComplaint.evidence, "-", _evidence));
+    }
+
+    function getEvidences(uint _id) public view returns (string memory) {
+        ComplaintData storage currentComplaint = alltheComplaints[_id];
+        require(currentComplaint.exists, "Complaint does not exist");
+
+        return currentComplaint.evidence;
+    }
+    
 }
