@@ -1,12 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flask Template Example</title>
-</head>
-<body>
-    <h1>Hello, ETHIndia!</h1>
-    <p>gm ETHIndia</p>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/main.css" />
+    <title>Crime Diesel</title>
+  </head>
+  <body>
+    <!-- section for home page START -->
+    <section id="section_1">
+      <input type="checkbox" id="check" />
+      <header>
+        <h1><a href="#" class="logo">CRIME DIESEL</a></h1>
+        <div class="nav">
+          <a href="#section_1">Home</a>
+          <a href="#section_2">Login</a>
+          <a href="#section_3">About Us</a>
+        </div>
+      </header>
+      <div class="container">
+          <div class="content">
+            <h2>Fighting For <span>Justice</span></h2>
+            <h2>Burning The <span class="specialH2">Crime</span></h2>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet
+              eveniet, mollitia temporibus accusantium dicta alias cum id itaque
+              vero voluptatem, animi natus magni maxime voluptate! Tempore
+              assumenda iste voluptates dolore?
+           </p>
+          </div>
+          <div class="photo">
+            <img src="{{url_for('static', filename = 'justice.svg')}}"/>
+          </div>
+      </div>
+    </section>
+    <!-- section of HOME page ENDS -->
+
+    <!-- section of LOGIN page STARTS -->
+    <section id="section_2">
+      <div class="login">
+        <div class="box">
+          <h2>USERS</h2>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
+            praesentium beatae porro quibusdam perferendis cumque consectetur
+            consequatur erro
+          </p>
+          <div class="button">
+            <button id="loginbuttonuser">CONNECT TO METAMASK</button>
+          </div>
+          <p id="status"></p>
+        </div>
+        <div class="box">
+          <h2>ORGANIZATION</h2>
+          <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt
+            numquam illum nesciunt quibusdam aliquid praesentium repudiandae
+            distinctio nam velit
+          </p>
+          <div class="button">
+            <button id="loginbuttonorg">CONNECT TO METAMASK</button>
+          </div>
+          <p id="status"></p>
+        </div>
+      </div>
+    </section>
+    <!-- section of LOGIN page ENDS -->
+    
+    <!-- section of About us page Starts-->
+    <section id="section_3">
+      <div class="intro">
+        <h2>ABOUT US</h2>
+        <p>
+          The JUSTICE LEAGUE HETC.eth brings hope for justice to the fellow
+          citizens all over the world to Lorem, ipsum dolor sit amet consectetur
+          adipisicing elit. Odio cumque ipsam reprehenderit consequuntur! Atque,
+          laudantium dignissimos cupiditate facilis omnis suscipit voluptatum
+          quibusdam, deleniti modi commodi dolor earum repellat vero officia.
+        </p>
+      </div>
+    </section>
+    <!-- section of About us page ends-->
+
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
+  </body>
 </html>
