@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/static/main.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+
     <title>Crime Diesel</title>
   </head>
   <body>
@@ -17,27 +22,51 @@
           <a href="#section_2">Login</a>
           <a href="#section_3">About Us</a>
         </div>
+        <label for="check">
+          <i class="fa-solid fa-bars"></i>
+          <i class="fa-regular fa-circle-xmark"></i>
+        </label>
       </header>
       <div class="container">
-          <div class="content">
-            <h2>Fighting For <span>Justice</span></h2>
-            <h2>Burning The <span class="specialH2">Crime</span></h2>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet
-              eveniet, mollitia temporibus accusantium dicta alias cum id itaque
-              vero voluptatem, animi natus magni maxime voluptate! Tempore
-              assumenda iste voluptates dolore?
-           </p>
-          </div>
-          <div class="photo">
-            <img src="{{url_for('static', filename = 'justice.svg')}}"/>
-          </div>
+        <div class="content">
+          <h2>Fighting For <span>Justice</span></h2>
+          <h2>Burning The <span class="specialH2">Crime</span></h2>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet
+            eveniet, mollitia temporibus accusantium dicta alias cum id itaque
+            vero voluptatem, animi natus magni maxime voluptate! Tempore
+            assumenda iste voluptates dolore?
+          </p>
+        </div>
+        <div class="photo">
+          <img
+            id="mainPh"
+            style="z-index: 2"
+            src="{{url_for('static', filename = 'justice.svg')}}"
+            alt=""
+          />
+          <img
+            style="z-index: 1"
+            id="testBalance"
+            src="https://media.tenor.com/P7qE_2iXLQMAAAAC/justice-democracy.gif"
+            alt=""
+            srcset=""
+          />
+        </div>
       </div>
     </section>
     <!-- section of HOME page ENDS -->
 
     <!-- section of LOGIN page STARTS -->
     <section id="section_2">
+      <div class="marquee">
+        <h2>METAMASK-LOG_IN~</h2>
+        <h2>METAMASK-LOG_IN~</h2>
+        <h2>METAMASK-LOG_IN~</h2>
+        <h2>METAMASK-LOG_IN~</h2>
+        <h2>METAMASK-LOG_IN~</h2>
+        <h2>METAMASK-LOG_IN~</h2>
+      </div>
       <div class="login">
         <div class="box">
           <h2>USERS</h2>
@@ -66,7 +95,7 @@
       </div>
     </section>
     <!-- section of LOGIN page ENDS -->
-    
+
     <!-- section of About us page Starts-->
     <section id="section_3">
       <div class="intro">
