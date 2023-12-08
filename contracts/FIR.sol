@@ -57,5 +57,32 @@ contract Complaint {
         ++idplus;
 
         emit ComplaintFiled(newComplaint.id, newComplaint.inCharge, newComplaint.title, newComplaint.description);
+    }  
+
+    function approveComplaint(uint _id, string memory _approvalRemark) public onlyOfficer {
+        ComplaintData storage currentComplaint = alltheComplaints[_id];
+        require(currentComplaint.exists, "Complaint does not exist");
+        require(!currentComplaint.approved, "Complaint already verified");
+
+        currentComplaint.approvalRemark = _approvalRemark;
+        currentComplaint.approved = true;
+        approved.push(_id);
+
+        emit ComplaintApproved(currentComplaint.id, officer, _approvalRemark);
+    }
+
+    function removeComplaint(uint _id, string memory _reason) public onlyOfficer returns(string memory) {
+        ComplaintData storage currentComplaint = alltheComplaints[_id];
+        require(currentComplaint.exists, "Complaint does not exist!");
+        require(!currentComplaint.approved, "Cannot remove an approved complaint!");
+
+        currentComplaint.exists = false;
+        emit ComplaintRejected(currentComplaint.id, officer, _reason);
+
+        return _reason;
+    }  
+     function changeOfficer(address _address) public onlyOfficer {
+        officer = _address;
+        emit OfficerChanged(_address);
     }
 }
