@@ -1,12 +1,65 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flask Template Example</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Push Protocol App</title>
 </head>
 <body>
-    <h1>Hello, ETHIndia!</h1>
-    <p>gm ETHIndia</p>
+  <div>
+    <form id="userInputForm">
+      <label for="userInput">Enter your message:</label>
+      <input type="text" id="userInput" name="userInput" required>
+      <button type="button" onclick="sendMessage()">Send Message</button>
+    </form>
+  </div>
+  <script type="module">
+    // Import Push SDK & Ethers
+    import { PushAPI, CONSTANTS } from "@pushprotocol/restapi";
+    import { ethers } from "ethers";
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const user_input = document.getElementById("userInput").value;
+
+      // Display the form in the app or redirect the user to a web page containing the form
+      console.log("Please enter your message:");
+      console.log(userInputForm);
+
+      async function sendMessage() {
+        // Get the user input from the form
+        const user_input = document.getElementById("userInput").value;
+
+        // Creating a random signer from a wallet, ideally this is the wallet you will connect
+        const signer = ethers.Wallet.createRandom();
+
+        // Initialize wallet user
+        // 'CONSTANTS.ENV.PROD' -> mainnet apps | 'CONSTANTS.ENV.STAGING' -> testnet apps
+        const userAlice = await PushAPI.initialize(signer, { env: CONSTANTS.ENV.STAGING });
+
+        // This will be the wallet address of the recipient
+        const bobWalletAddress = "0x99A08ac6254dcf7ccc37CeC662aeba8eFA666666";
+
+        // Send a message to Bob
+        const aliceMessagesBob = await userAlice.chat.send(bobWalletAddress, {
+          content: user_input,
+        });
+
+        // Initialize Stream
+        const stream = await userAlice.initStream([CONSTANTS.STREAM.CHAT]);
+
+        // Configure stream listen events and what to do
+        stream.on(CONSTANTS.STREAM.CHAT, (message) => {
+          console.log(message);
+        });
+
+        // Connect Stream
+        stream.connect();
+      }
+
+      // Call sendMessage to initialize the script after the document has loaded
+      sendMessage();
+    });
+  </script>
 </body>
 </html>

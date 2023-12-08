@@ -1,0 +1,17 @@
+{
+  "name": "ethindia23-crime-diesel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@pushprotocol/restapi": "^1.4.45",
+    "@pushprotocol/socket": "^0.5.3",
+    "ethers": "5.7"
+  }
+}
