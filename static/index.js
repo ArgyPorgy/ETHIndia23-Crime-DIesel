@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     
 
     loginButton1.addEventListener("click", async () => {
+
         if (typeof window.ethereum === "undefined") {
             statusElement.textContent = "Metamask not detected. Please install Metamask to use this feature.";
             return;
@@ -42,32 +43,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             const selectedAccount = accounts[0];
             sessionStorage.setItem('metamask_logged_in', 'true');
             showgoodAlert(`Logged in with address: ${selectedAccount}`)
-
-            //lemme try something from here
-
-            
-                const response = await fetch('/notify_login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        loggedIn: true,
-                        
-                    }),
-                });
-            
-                if (response.ok) {
-                    alert('Server notified about login status');
-                    window.location.href = 'userpage.html';
-                } else {
-                    alert('Failed to notify server about login status');
-                }
-            
-            
-
-            //to here
-            
+            window.location.href = 'userpage.html';
 
         } catch (error) {
             console.error(error);
