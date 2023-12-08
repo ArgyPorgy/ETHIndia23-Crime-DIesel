@@ -1,0 +1,225 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;700&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    
+    box-sizing: border-box;
+    font-family: "Poppins", Arial;
+    scroll-behavior:smooth;
+}
+::-webkit-scrollbar{
+    display: none;
+}
+#section_1{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background: url(IndiaLitSpace.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+header{
+    position: relative;
+    top: 0;
+    width: 100%;
+    padding: 30px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 1s;
+}
+header .logo{
+    position: relative;
+    color: white;
+    font-size: 35px;
+    text-decoration: none;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+header .nav a{
+    color: antiquewhite;
+    background: linear-gradient(darkblue, darkviolet);
+    text-decoration: none;
+    font-weight: 500;
+    letter-spacing: 1px;
+    padding: 2px 15px;
+    border-radius: 20px;
+    transition-property: background;
+    transition-property: transform;
+}
+header .nav a:not(:last-child){
+    margin-right: 30px;
+}
+header .nav a:hover{
+    background: #fff;
+    background: linear-gradient(darkblue, crimson);
+    transform: scale(1.8);
+}
+.container{
+    height: 100vh;
+    margin: 30px 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.container .content{
+    background: rgba(0, 0, 0, 0.5);
+    max-width: 700px;
+    padding: 20px 20px;
+    border-radius: 50px;
+}
+.container .content h2, .intro h2{
+    color: orange;
+    font-size:  50px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    line-height: 60px;
+    margin-bottom: 30px;
+}
+.container .content h2 span{
+    color: rgb(255, 255, 255);
+    font-size: 60px;
+    font-weight: 800px;
+    text-shadow: 0 0 10px orangered;
+}
+.specialH2{
+    color: orangered;
+    text-shadow: none;
+}
+.container .content p, .intro p{
+    font-size: 25px;
+    font-weight: 400;
+    color: white;
+}
+label{
+    display: none;
+    margin-right: 20px;
+}
+#check{
+    z-index: 3;
+    display: none;
+}
+
+
+
+.marquee{
+    display: flex;
+    justify-content: flex-start;
+    background-color: #000000;
+    overflow: hidden;
+}
+.marquee h2{
+    font-size: 25px;
+    color: transparent;
+    font-weight: 800;
+    -webkit-text-stroke-width: 0.4px;
+    -webkit-text-stroke-color: #fff;
+    white-space: nowrap;
+    letter-spacing: 1.5px;
+    animation: move 9s linear infinite;
+}
+@keyframes move {
+    0%{
+        transform: translateX(0);
+    }
+    100%{
+        transform: translateX(-100%);
+    }
+}
+#section_2{
+    padding-bottom:100px ;
+    position: relative;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background: black linear-gradient(#1D1E30,rgb(71, 4, 99));
+    background-size: contain;
+    color: #fff;
+    overflow: hidden;
+}
+#section_2::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(#1D1E30,darkblue);
+    border-radius: 0 0 100% 100%/0 0 100% 100%;
+}
+
+.login, .about{
+    margin: 30px 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.box{
+    padding: 40px 30px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    /* background: rgba(0, 0, 0, 0.3); */
+    overflow: hidden;
+    border-radius: 20px;
+    /* margin-right: 50px; */
+    max-width: 450px;
+    /* min-width: 250px; */
+    box-shadow: 0 10px 52px black;
+}
+.box::before{
+    content: "";
+    position: absolute;
+    width: 500%;
+    height: 50%;
+    background: linear-gradient(blue,orange);
+    animation: animate 4s linear infinite;
+}
+.box h2, .box p{
+    position: relative;
+    color: #fff;
+    z-index: 10;
+}
+.box::after{
+    content: '';
+    position: absolute;
+    inset: 5px;
+    background: linear-gradient(rgba(0, 0, 0), darkviolet);
+    border-radius: 14px;
+}
+@keyframes animate {
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+.button{
+    z-index: 10;
+    padding-top: 10px;
+}
+button{
+    padding: 10px 10px 10px 10px;
+    color: white;
+    font-size: 15px;
+    background: darkmagenta;
+    border: 3px solid orange;
+    border-radius: 35px;
+    min-width: 200px;
+    cursor: pointer;
+}
+button:hover{
+    background: linear-gradient(darkblue, darkviolet);
+    transform: scale(1.2);
+    cursor: pointer;
+}

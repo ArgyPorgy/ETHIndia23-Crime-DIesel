@@ -1,65 +1,117 @@
 <!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Push Protocol App</title>
-</head>
-<body>
-  <div>
-    <form id="userInputForm">
-      <label for="userInput">Enter your message:</label>
-      <input type="text" id="userInput" name="userInput" required>
-      <button type="button" onclick="sendMessage()">Send Message</button>
-    </form>
-  </div>
-  <script type="module">
-    // Import Push SDK & Ethers
-    import { PushAPI, CONSTANTS } from "@pushprotocol/restapi";
-    import { ethers } from "ethers";
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/main.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
 
-    document.addEventListener("DOMContentLoaded", () => {
-      const user_input = document.getElementById("userInput").value;
+    <title>Crime Diesel</title>
+  </head>
+  <body>
+    <!-- section for home page START -->
+    <section id="section_1">
+      <input type="checkbox" id="check" />
+      <header>
+        <h1><a href="#" class="logo">CRIME DIESEL</a></h1>
+        <div class="nav">
+          <a href="#section_1">Home</a>
+          <a href="#section_2">Login</a>
+          <a href="#section_3">About Us</a>
+        </div>
+        <label for="check">
+          <i class="fa-solid fa-bars"></i>
+          <i class="fa-regular fa-circle-xmark"></i>
+        </label>
+      </header>
+      <div class="container">
+        <div class="content">
+          <h2>Fighting For <span>Justice</span></h2>
+          <h2>Burning The <span class="specialH2">Crime</span></h2>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet
+            eveniet, mollitia temporibus accusantium dicta alias cum id itaque
+            vero voluptatem, animi natus magni maxime voluptate! Tempore
+            assumenda iste voluptates dolore?
+          </p>
+        </div>
+        <div class="photo">
+          <img
+            id="mainPh"
+            style="z-index: 2"
+            src="{{url_for('static', filename = 'justice.svg')}}"
+            alt=""
+          />
+          <img
+            style="z-index: 1"
+            id="testBalance"
+            src="https://media.tenor.com/P7qE_2iXLQMAAAAC/justice-democracy.gif"
+            alt=""
+            srcset=""
+          />
+        </div>
+      </div>
+    </section>
+    <!-- section of HOME page ENDS -->
 
-      // Display the form in the app or redirect the user to a web page containing the form
-      console.log("Please enter your message:");
-      console.log(userInputForm);
+    <!-- section of LOGIN page STARTS -->
+    <section id="section_2">
+      <div class="marquee">
+        <h2>METAMASK-LOG_IN~</h2>
+        <h2>METAMASK-LOG_IN~</h2>
+        <h2>METAMASK-LOG_IN~</h2>
+        <h2>METAMASK-LOG_IN~</h2>
+        <h2>METAMASK-LOG_IN~</h2>
+        <h2>METAMASK-LOG_IN~</h2>
+      </div>
+      <div class="login">
+        <div class="box">
+          <h2>USERS</h2>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
+            praesentium beatae porro quibusdam perferendis cumque consectetur
+            consequatur erro
+          </p>
+          <div class="button">
+            <button id="loginbuttonuser">CONNECT TO METAMASK</button>
+          </div>
+          <p id="status"></p>
+        </div>
+        <div class="box">
+          <h2>ORGANIZATION</h2>
+          <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt
+            numquam illum nesciunt quibusdam aliquid praesentium repudiandae
+            distinctio nam velit
+          </p>
+          <div class="button">
+            <button id="loginbuttonorg">CONNECT TO METAMASK</button>
+          </div>
+          <p id="status"></p>
+        </div>
+      </div>
+    </section>
+    <!-- section of LOGIN page ENDS -->
 
-      async function sendMessage() {
-        // Get the user input from the form
-        const user_input = document.getElementById("userInput").value;
+    <!-- section of About us page Starts-->
+    <section id="section_3">
+      <div class="intro">
+        <h2>ABOUT US</h2>
+        <p>
+          The JUSTICE LEAGUE HETC.eth brings hope for justice to the fellow
+          citizens all over the world to Lorem, ipsum dolor sit amet consectetur
+          adipisicing elit. Odio cumque ipsam reprehenderit consequuntur! Atque,
+          laudantium dignissimos cupiditate facilis omnis suscipit voluptatum
+          quibusdam, deleniti modi commodi dolor earum repellat vero officia.
+        </p>
+      </div>
+    </section>
+    <!-- section of About us page ends-->
 
-        // Creating a random signer from a wallet, ideally this is the wallet you will connect
-        const signer = ethers.Wallet.createRandom();
-
-        // Initialize wallet user
-        // 'CONSTANTS.ENV.PROD' -> mainnet apps | 'CONSTANTS.ENV.STAGING' -> testnet apps
-        const userAlice = await PushAPI.initialize(signer, { env: CONSTANTS.ENV.STAGING });
-
-        // This will be the wallet address of the recipient
-        const bobWalletAddress = "0x99A08ac6254dcf7ccc37CeC662aeba8eFA666666";
-
-        // Send a message to Bob
-        const aliceMessagesBob = await userAlice.chat.send(bobWalletAddress, {
-          content: user_input,
-        });
-
-        // Initialize Stream
-        const stream = await userAlice.initStream([CONSTANTS.STREAM.CHAT]);
-
-        // Configure stream listen events and what to do
-        stream.on(CONSTANTS.STREAM.CHAT, (message) => {
-          console.log(message);
-        });
-
-        // Connect Stream
-        stream.connect();
-      }
-
-      // Call sendMessage to initialize the script after the document has loaded
-      sendMessage();
-    });
-  </script>
-</body>
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
+  </body>
 </html>
