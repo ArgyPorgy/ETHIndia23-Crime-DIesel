@@ -506,3 +506,329 @@ const contractABI = [{
     "type": "function"
 }]// Replace with your contract ABI // new abi at 10pm  // Replace with the actual ABI of your contract
 
+async function searchCase(id) {
+	const web3 = new Web3("https://rpc-mumbai.maticvigil.com/");
+	const contract = new web3.eth.Contract(contractABI, contractAddress);
+	try {
+		const complaint = await contract.methods.alltheComplaints(id).call();
+		return complaint;
+
+	}
+	catch (error) {
+		console.error('Error fetching case data:', error);
+
+	}
+}
+function closeFir() {
+	document.getElementById("resultContainer").style.display = "none";
+}
+function displayResult(result) {
+	// Access the resultContainer
+
+
+	const resultContainer = document.getElementById('resultContainer');
+
+	// Clear previous results
+	resultContainer.innerHTML = '';
+	const butElem = `<button class = "closeFir" onclick="closeFir();">x</button>`;
+	resultContainer.innerHTML += butElem;
+	resultContainer.style = "block";
+
+
+
+	// Extract relevant information
+	const id = result[0];
+	const inCharge = result[1];
+	const title = result[2];
+	const description = result[3];
+	const approved = result[4];
+	const resolved = result[5];
+	const exists = result[6];
+	const approvalRemark = result[7];
+
+	// Create a table to display the result
+	const table = document.createElement('table');
+	const approvalBtn = `<button onclick = "approveFir();" id = "approvalBtn">Approve</button>`
+	// Create a row for each piece of information
+	const rows = [
+		['Case ID', id],
+		['Made By', inCharge],
+		['Name', title],
+		['Description', description],
+		['Exists', approved],
+		['Approved', resolved],
+		['Resolved', exists],
+		['Approval Remark', approvalRemark]
+	];
+	let caseId;
+	// Iterate over the rows and create table cells
+	for (const [label, value] of rows) {
+		const row = table.insertRow();
+		const cell1 = row.insertCell(0);
+		const cell2 = row.insertCell(1);
+		if (label === 'Case ID')
+			caseId = value;
+		cell1.textContent = label;
+		cell2.textContent = value;
+		if (label === 'Approved' || label === 'Resolved') {
+			// const cell3 = row.insertCell(2);
+			const approveButton = createButton(label, caseId, value);
+			cell2.appendChild(approveButton);
+		}
+	}
+
+	// Append the table to the resultContainer
+	resultContainer.appendChild(table);
+	resultContainer.innerHTML += `
+	<button id="getEvidenceButton" onclick= "viewEvidences(${id})" >View Evidences</button>
+	<button id="sendEvidenceButton" onclick= "setEvidences(${id})" >Add New Evidence</button>
+	`
+
+}
+
+function displayEvidences(evidenceArray)
+{
+	/*
+	this portion is left to be done. (now done...)
+	- soham
+	*/
+	const evilist = document.querySelector("#eviList");
+	evilist.innerHTML = '';
+
+    // Iterate over the evidenceArray and create list items
+    evidenceArray.forEach((hash, index) => {
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `<a style="color: white;" href="https://gateway.lighthouse.storage/ipfs/${hash}" target="_blank">Evidence ${index+1}</a>`;
+        evilist.appendChild(listItem);
+    });
+	document.querySelector('.evidenceContainer').style.display = "block";
+}
+
+async function ApprovedFir(button) {
+	const web3 = new Web3(window.ethereum);
+
+	const contract = new web3.eth.Contract(contractABI, contractAddress);
+	const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+	const accNo = accounts[0];
+	//have to add more features
+
+	try {
+
+		closeFir();
+
+		await contract.methods.approveComplaint(button.getAttribute('data-id'), "approve message").send({
+			from: accNo,
+		});
+		showgoodAlert("Successfully approved! ", 2000);
+
+	}
+	catch (error) {
+		showbadAlert("Error approving! Try again...", 2000);
+		console.error(error);
+	}
+
+
+}
+function createButton(work, IDval, value) {
+	const button = document.createElement('button');
+	button.classList.add(`${work}Btn`);
+	console.log(value);
+	if (value == true) {
+		button.classList.add(`success`);
+		button.textContent = work;
+		button.setAttribute('onclick', `alert("Already ${work}!")`);
+
+	}
+	else if (value == false) {
+		button.textContent = work.slice(0, -1);
+
+		button.setAttribute('data-id', IDval);
+		button.setAttribute('onclick', `${work}Fir(this);`);
+	}
+	return button;
+}
+
+
+async function ResolvedFir(button) {
+	const web3 = new Web3(window.ethereum);
+
+	const contract = new web3.eth.Contract(contractABI, contractAddress);
+	const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+	const accNo = accounts[0];
+	//have to add more features
+
+	try {
+
+		closeFir();
+
+		await contract.methods.resolve(button.getAttribute('data-id'), "Resolved").send({
+			from: accNo,
+		});
+        showgoodAlert("Successfully Resolved! ", 2000);
+
+	}
+	catch (error) {
+		showbadAlert('Error Resolving. Try Again', 2000);
+		console.error(error);
+	}
+
+
+}
+async function findCase(event) {
+	try {
+		event.preventDefault();
+		// const searchId = document.querySelector(".searchBox").value;
+		// var inputElement = form.querySelector('#searchBox');
+		var searchId = document.querySelector("#searchBox");
+		console.log(searchId.value);
+
+
+		const rendercase = searchCase(searchId.value);
+		console.log(rendercase);
+
+
+		const result = await searchCase(searchId.value);
+
+		// Display the result in the resultContainer
+		displayResult(result);
+	}
+	catch (error) {
+		
+		showbadAlert('Try Again', 2000);
+	}
+}
+
+function addImageField() {
+	var container = document.getElementById("imageFields");
+	var input = document.createElement("input");
+	input.type = "file";
+	input.name = "imageObj";
+	input.accept = "image/*";
+	container.appendChild(input);
+	container.appendChild(document.createElement("br"));
+}
+document.getElementById("registerForm").addEventListener("submit", function () {
+	console.log("Form Submit");
+	// Your form submission logic here
+}
+);
+        
+
+
+document.getElementById("registerForm")
+        .addEventListener("submit", function(event) {
+          event.preventDefault();
+
+          fetch("/process_hash", {
+            method: "POST",
+            body: new FormData(this),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              // Access the hashArray directly
+              const hashArray = data.hashArray;
+              const name = document.getElementById("name").value;
+              const description = document.getElementById("description").value;
+                
+              // Now you can use the hashArray in your JavaScript code
+              console.log(hashArray); // to check
+                let hashString = "";
+              for(let i =0 ; i<hashArray.length; i++)
+              {
+                
+                hashString+=hashArray[i];
+                if(i+1 != hashArray.length)
+                {
+                    hashString+="-";
+                    //to seperate the values;
+                }
+              }
+              // now the best part[we send it to mumbai]
+               sendCaseRegistration(name, description, hashString);
+              
+
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+            });
+        });
+
+       
+        
+
+async function sendCaseRegistration(name, description, hashString)
+{
+	const web3 = new Web3(window.ethereum);
+
+	const contract = new web3.eth.Contract(contractABI, contractAddress);
+	const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+	const accNo = accounts[0];
+
+try{
+    
+    
+
+
+			contract.methods.caseRegistration(name, description, hashString)
+			.send({ from: accNo })
+			.on('transactionHash', function(hash) {
+				console.log('Transaction Hash:', hash);
+			})
+			.on('confirmation', function(confirmationNumber, receipt) {
+				if (confirmationNumber === 1) {
+					// The transaction is confirmed, and the receipt contains the newComplaint.id
+					const newComplaintId = receipt.events.DataStored.returnValues.id;
+					alert(`Complaint filed at ID: ${newComplaintId}`);
+				}
+			});
+			window.location.href = '/sendNoti';
+}
+catch(error)
+{
+    console.log(error);
+    alert("error");
+}
+
+
+}
+
+
+async function viewEvidences(firID)
+{
+// this is a function that will call the viewEvidence fuction from solidity and 
+// give us the hashes seperated by a '-'
+// ekhon otakei ekta array e ante hobe :)
+const web3 = new Web3("https://rpc-mumbai.maticvigil.com/");
+	const contract = new web3.eth.Contract(contractABI, contractAddress);
+	
+	try{
+
+	
+	const maxID = await contract.methods.idplus().call();
+	console.log("id: ", maxID);
+
+	if(firID>=maxID || firID<=0)
+	{
+		return "outofbounds";
+	}
+	else{
+		//here we go!
+
+		const result = await contract.methods.getEvidences(firID).call();
+		const evidenceArray = result.split('-');
+		console.log(evidenceArray);
+		displayEvidences(evidenceArray);
+		// this will return the array of the hashes
+		// now i have to extract this 
+		//https://gateway.lighthouse.storage/ipfs/ <--- this is the endpoint
+	}
+}
+catch(error)
+{
+	print("error: ", error);
+	
+	alert("error");
+}
+
+
+}
