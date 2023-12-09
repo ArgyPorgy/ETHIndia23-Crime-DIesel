@@ -1,3 +1,5 @@
+// 0x0bC497a90F7162DF42978B7c3a6014083393680E --> contract Address
+
 function showgoodAlert(message, duration) {
     const alertDiv = document.createElement('div');
     alertDiv.className = 'alert';
@@ -20,3 +22,22 @@ function showbadAlert(message, duration) {
     }, duration || 2000);
     return 0;
 }
+document.addEventListener("DOMContentLoaded", function () {
+    const openFormButton = document.getElementById("openFormButton");
+    const formContainer = document.getElementById("formContainer");
+
+    let x = 0;
+    openFormButton.addEventListener("click", function () {
+        // Show the form container
+        if (x == 0) {
+
+            formContainer.classList.remove("hidden");
+            x =1 ;
+        }
+else{
+    formContainer.classList.add("hidden");
+    x = 0;
+}
+    });
+
+});
