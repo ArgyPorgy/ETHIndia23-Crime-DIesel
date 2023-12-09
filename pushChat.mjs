@@ -13,10 +13,11 @@ const signer = new ethers.Wallet(`0x${privetkey}`);
 const userAlice = await PushAPI.initialize(signer, { env: CONSTANTS.ENV.STAGING });
 
 // This will be the wallet address of the recipient
-const bobWalletAddress = "0x09baC5a40E9AB852AB9c86d32Cd79432c80d8739";
+const bobWalletAddress = "c5df9f4535944d8e3df7b5801e5552a9974f60b565af17b4e9b2ace1442308ce";
+const bobsigner = new ethers.Wallet(`0x${bobWalletAddress}`);
 
 // Send a message to Bob
-const aliceMessagesBob = await userAlice.chat.send(bobWalletAddress, {
+const aliceMessagesBob = await userAlice.chat.send(bobsigner, {
   content: "ghum asche",
 });
 

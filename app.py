@@ -1,10 +1,16 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 from markupsafe import escape
+from dotenv import load_dotenv
 import subprocess
+import os
+
+load_dotenv()
+
 app = Flask(__name__)
 
 @app.route('/')
 def index():
+    privetkey = os.getenv('privetkey')
     return render_template('index.html')
 
 @app.route('/userpage.html')
