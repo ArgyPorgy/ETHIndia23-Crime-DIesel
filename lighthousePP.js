@@ -2,10 +2,11 @@ const lighthouse = require('@lighthouse-web3/sdk');
 
 // Your code here
 const file = process.argv[2];
+// const file = "README.md"
 async function uploadFile(){
 const uploadResponse = await lighthouse.upload(
     file, 
-    '418fbc33.a80cbd535b324af3b22a42f6a5506495' //my apikey
+    '313551a9.a08700c86a514f4185a29541f928f6e8' //my apikey
   );
 console.log(uploadResponse);
 }

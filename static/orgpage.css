@@ -94,20 +94,23 @@ transform: translateX(-50%);
 }
 
 #resultContainer {
-    position: absolute;
+    position: fixed;
     z-index: 112141;
     background-color: #fff; /* White background */
     color: #333; /* Dark text color */
     width: fit-content;
+    max-width: 90vw;
     padding: 5px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+
 }
 
 #resultContainer table {
     border-collapse: collapse;
-    width: 100%;
+    width: auto;
+    overflow-wrap: break-word;
     margin-top: 20px; /* Add some margin for spacing */
 }
 
@@ -115,8 +118,11 @@ transform: translateX(-50%);
     border: 1px solid #ddd;
     padding: 12px;
     text-align: left;
+    
 }
-
+th, td{
+    overflow-wrap: break-word;
+}
 #resultContainer th {
     background-color: #f0f0f0; /* Light gray background for headers */
 }

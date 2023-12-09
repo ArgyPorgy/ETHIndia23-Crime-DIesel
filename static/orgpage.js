@@ -50,7 +50,7 @@ function toggleCases() {
 
 //Total web3.js part ->
 const web3 = new Web3("https://rpc.public.zkevm-test.net"); // Replace with the URL of your Ethereum 
-const contractAddress = '0x0bC497a90F7162DF42978B7c3a6014083393680E'; //this is the new contract address made on (9/12/23) at 3pm
+const contractAddress = '0xa3E7B61477c5fca6C8eB6bEE1D8b536199a57914'; //this is the new contract address made on (9/12/23) at 3pm
 const contractABI = [{
     "inputs": [],
     "stateMutability": "nonpayable",
@@ -507,7 +507,7 @@ const contractABI = [{
 }]// Replace with your contract ABI // new abi at 10pm  // Replace with the actual ABI of your contract
 
 async function searchCase(id) {
-	const web3 = new Web3("https://rpc-mumbai.maticvigil.com/");
+	const web3 = new Web3("https://rpc.public.zkevm-test.net");
 	const contract = new web3.eth.Contract(contractABI, contractAddress);
 	try {
 		const complaint = await contract.methods.alltheComplaints(id).call();
@@ -518,10 +518,16 @@ async function searchCase(id) {
 		console.error('Error fetching case data:', error);
 
 	}
-}
+} 
+//working
+
+
 function closeFir() {
 	document.getElementById("resultContainer").style.display = "none";
 }
+//working
+
+
 function displayResult(result) {
 	// Access the resultContainer
 
@@ -566,6 +572,7 @@ function displayResult(result) {
 		const row = table.insertRow();
 		const cell1 = row.insertCell(0);
 		const cell2 = row.insertCell(1);
+
 		if (label === 'Case ID')
 			caseId = value;
 		cell1.textContent = label;
@@ -581,10 +588,12 @@ function displayResult(result) {
 	resultContainer.appendChild(table);
 	resultContainer.innerHTML += `
 	<button id="getEvidenceButton" onclick= "viewEvidences(${id})" >View Evidences</button>
-	<button id="sendEvidenceButton" onclick= "setEvidences(${id})" >Add New Evidence</button>
 	`
+	//<button id="sendEvidenceButton" onclick= "setEvidences(${id})" >Add New Evidence</button>
 
 }
+// working
+
 
 function displayEvidences(evidenceArray)
 {
@@ -603,7 +612,7 @@ function displayEvidences(evidenceArray)
     });
 	document.querySelector('.evidenceContainer').style.display = "block";
 }
-
+// not w
 async function ApprovedFir(button) {
 	const web3 = new Web3(window.ethereum);
 
@@ -629,6 +638,8 @@ async function ApprovedFir(button) {
 
 
 }
+// working (maybe)
+
 function createButton(work, IDval, value) {
 	const button = document.createElement('button');
 	button.classList.add(`${work}Btn`);
@@ -647,6 +658,7 @@ function createButton(work, IDval, value) {
 	}
 	return button;
 }
+//working
 
 
 async function ResolvedFir(button) {
@@ -677,8 +689,7 @@ async function ResolvedFir(button) {
 async function findCase(event) {
 	try {
 		event.preventDefault();
-		// const searchId = document.querySelector(".searchBox").value;
-		// var inputElement = form.querySelector('#searchBox');
+		
 		var searchId = document.querySelector("#searchBox");
 		console.log(searchId.value);
 
@@ -697,6 +708,8 @@ async function findCase(event) {
 		showbadAlert('Try Again', 2000);
 	}
 }
+//working
+
 
 function addImageField() {
 	var container = document.getElementById("imageFields");
@@ -707,13 +720,89 @@ function addImageField() {
 	container.appendChild(input);
 	container.appendChild(document.createElement("br"));
 }
-document.getElementById("registerForm").addEventListener("submit", function () {
-	console.log("Form Submit");
-	// Your form submission logic here
-}
-);
-        
+//working
 
+
+/*
+        function sendMainData(event)
+        {
+            event.preventDefault();
+            console.log("submitted");
+            const name = document.getElementById("name").value;
+            const description = document.getElementById("description").value;
+            fetch("/process_hash", {
+                method: "GET",
+                body: new FormData(this),
+              })
+                .then((response) => response.json())
+                .then((data) => {
+                  // Access the hashArray directly
+                  const hashArray = data.hashArray;
+                  
+                    
+                  // Now you can use the hashArray in your JavaScript code
+                  console.log("processed hash you: ", hashArray); // to check
+                    let hashString = "";
+                  for(let i =0 ; i<hashArray.length; i++)
+                  {
+                    
+                    hashString+=hashArray[i];
+                    if(i+1 != hashArray.length)
+                    {
+                        hashString+="-";
+                        //to seperate the values;
+                    }
+                  }
+                  
+                   sendCaseRegistration(name, description, hashString);
+                  
+    
+                })
+                .catch((error) => {
+                  console.error("Error:", error);
+                });
+
+        }
+
+*/
+
+async function sendCaseRegistration(name, description, hashString)
+{
+	const web3 = new Web3(window.ethereum);
+
+	const contract = new web3.eth.Contract(contractABI, contractAddress);
+	const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+	const accNo = accounts[0];
+
+try{
+
+
+			contract.methods.caseRegistration(name, description, hashString)
+			.send({ from: accNo })
+			.on('transactionHash', function(hash) {
+				console.log('Transaction Hash:', hash);
+			})
+			.on('confirmation', function(confirmationNumber, receipt) {
+				if (confirmationNumber === 1) {
+					// The transaction is confirmed, and the receipt contains the newComplaint.id
+					const newComplaintId = receipt.events.DataStored.returnValues.id;
+					alert(`Complaint filed at ID: ${newComplaintId}`);
+                    fetch("/run_js")
+  .then((response) => response.text())
+  .then((data) => console.log(data))
+  .catch((error) => console.error(error));
+                }
+			});
+			
+}
+catch(error)
+{
+    console.log(error);
+    alert("error");
+}
+
+
+}
 
 document.getElementById("registerForm")
         .addEventListener("submit", function(event) {
@@ -729,9 +818,55 @@ document.getElementById("registerForm")
               const hashArray = data.hashArray;
               const name = document.getElementById("name").value;
               const description = document.getElementById("description").value;
-                
+
               // Now you can use the hashArray in your JavaScript code
               console.log(hashArray); // to check
+                let hashString = "";
+              for(let i =0 ; i<hashArray.length; i++)
+              {
+
+                hashString+=hashArray[i];
+                if(i+1 != hashArray.length)
+                {
+                    hashString+="-";
+                    //to seperate the values;
+                }
+              }
+              // now the best part[we send it to mumbai]
+               sendCaseRegistration(name, description, hashString);
+
+
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+            });
+        });
+
+
+
+
+
+
+
+/*
+document.getElementById("registerForm")
+        .addEventListener("submit", function(event) {
+        //   event.preventDefault();
+            
+            const description = document.getElementById("description").value;
+              const name = document.getElementById("name").value;
+            fetch("/process_hash", {
+            method: "POST",
+            body: new FormData(this),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              // Access the hashArray directly
+              const hashArray = data.hashArray;
+              
+                
+              // Now you can use the hashArray in your JavaScript code
+              console.log("processed hash you: ", hashArray); // to check
                 let hashString = "";
               for(let i =0 ; i<hashArray.length; i++)
               {
@@ -743,7 +878,7 @@ document.getElementById("registerForm")
                     //to seperate the values;
                 }
               }
-              // now the best part[we send it to mumbai]
+              
                sendCaseRegistration(name, description, hashString);
               
 
@@ -753,44 +888,10 @@ document.getElementById("registerForm")
             });
         });
 
-       
+  */     
         
 
-async function sendCaseRegistration(name, description, hashString)
-{
-	const web3 = new Web3(window.ethereum);
 
-	const contract = new web3.eth.Contract(contractABI, contractAddress);
-	const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-	const accNo = accounts[0];
-
-try{
-    
-    
-
-
-			contract.methods.caseRegistration(name, description, hashString)
-			.send({ from: accNo })
-			.on('transactionHash', function(hash) {
-				console.log('Transaction Hash:', hash);
-			})
-			.on('confirmation', function(confirmationNumber, receipt) {
-				if (confirmationNumber === 1) {
-					// The transaction is confirmed, and the receipt contains the newComplaint.id
-					const newComplaintId = receipt.events.DataStored.returnValues.id;
-					alert(`Complaint filed at ID: ${newComplaintId}`);
-				}
-			});
-			window.location.href = '/sendNoti';
-}
-catch(error)
-{
-    console.log(error);
-    alert("error");
-}
-
-
-}
 
 
 async function viewEvidences(firID)
@@ -798,7 +899,7 @@ async function viewEvidences(firID)
 // this is a function that will call the viewEvidence fuction from solidity and 
 // give us the hashes seperated by a '-'
 // ekhon otakei ekta array e ante hobe :)
-const web3 = new Web3("https://rpc-mumbai.maticvigil.com/");
+const web3 = new Web3("https://rpc.public.zkevm-test.net");
 	const contract = new web3.eth.Contract(contractABI, contractAddress);
 	
 	try{

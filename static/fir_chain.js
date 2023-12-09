@@ -487,8 +487,8 @@ async function storeFormDetails() {
   .then((response) => response.text())
   .then((data) => console.log(data))
   .catch((error) => console.error(error));
-
-  
+alert('payment confirmed');
+  // only notification is not coming
         }
     });
 		// Handle success or update UI
