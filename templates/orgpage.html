@@ -27,7 +27,7 @@
         <button class="buttonS" onclick="openCaseForm()">Register Case</button>
         <div id="caseForm" style="display:none;">
           <form
-            action="#"
+            action="{{ url_for('upload') }}"
             method="post"
             id="registerForm"
             enctype="multipart/form-data"
@@ -60,9 +60,7 @@
           </form>
         </div>
         <br />
-      <button class="buttonS">Update Case</button>
-
-      <br />
+        <br />
       <button class="buttonS" onclick="toggleCases();">View Case</button>
       </div>
       <div class="viewCaseForm" style="display: none">
@@ -73,7 +71,6 @@
             name="searchBox"
             type="number"
           />
-          <!-- <label for="searchBox">Search for the FIR:</label> -->
           <input
             type="submit" 
             class="sub"
