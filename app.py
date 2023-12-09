@@ -71,7 +71,32 @@ def upload():
         print("error encountered! ")
     return redirect(url_for('org'))
 
+def displayLogo():
+    
+    art = '''
+                          
+    _____          _                        _____    _                       _   
+   / ____|        (_)                      |  __ \  (_)                     | |  
+  | |       _ __   _   _ __ ___     ___    | |  | |  _    ___   ___    ___  | |  
+  | |      | '__| | | | '_ ` _ \   / _ \   | |  | | | |  / _ \ / __|  / _ \ | |  
+  | |____  | |    | | | | | | | | |  __/   | |__| | | | |  __/ \__ \ |  __/ | |  
+   \_____| |_|    |_| |_| |_| |_|  \___|   |_____/  |_|  \___| |___/  \___| |_|  
 
+            Developed By:
+
+            * Arghya Chowdhury
+            * Devjyoti Banerjee
+            * Mayukh Sen
+            * Soham De
+            * Sayan Genri
+    
+    '''
+
+
+
+    print(art)
+    print("***Initiating Server***")
 
 if __name__ == '__main__':
+    displayLogo()
     app.run(debug=True,port = 8000)
