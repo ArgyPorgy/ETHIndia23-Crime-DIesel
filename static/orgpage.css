@@ -15,7 +15,6 @@ body {
     /* margin: 20px; */
     overflow-y:scroll;
 }
-
 #main{
     background-image: url("https://c4.wallpaperflare.com/wallpaper/655/668/885/police-for-desktop-background-wallpaper-preview.jpg");
 
@@ -30,16 +29,16 @@ body {
     position: fixed;
     display: flex;
     z-index: 10;
-width: 3000px;
-height: 200px;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-animation-name: nocross;
-animation-duration: 50s;
-flex-direction: row;
-animation-iteration-count: infinite;
-transform: translateX(-50%);
+    width: 3000px;
+    height: 200px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-name: nocross;
+    animation-duration: 50s;
+    flex-direction: row;
+    animation-iteration-count: infinite;
+    transform: translateX(-50%);
 }
 @keyframes nocross {
     0%{
@@ -62,8 +61,8 @@ transform: translateX(-50%);
 #case{
     margin-top: 20px;
 }
-.buttonS{margin: 0 38%;
-
+.buttonS{
+    margin: 0 38%;
     padding: 10px 10px 10px 10px;
     color: white;
     z-index: 120;
@@ -92,4 +91,171 @@ transform: translateX(-50%);
 .searchBox
 {
     padding-left: 10px;
+}
+
+#resultContainer {
+    position: absolute;
+    z-index: 112141;
+    background-color: #fff; /* White background */
+    color: #333; /* Dark text color */
+    width: fit-content;
+    padding: 5px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#resultContainer table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px; /* Add some margin for spacing */
+}
+
+#resultContainer th, #resultContainer td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+#resultContainer th {
+    background-color: #f0f0f0; /* Light gray background for headers */
+}
+
+/* Styling for alternating row colors in the table */
+#resultContainer tr:nth-child(even) {
+    background-color: #f9f9f9; /* Very light gray background for even rows */
+}
+
+#resultContainer tr:nth-child(odd) {
+    background-color: #eafbea; /* Pale green background for odd rows */
+}
+
+/* Styling for the close button */
+.closeBtn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #d9534f; /* Red background */
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 25px;
+    cursor: pointer;
+    color: #fff; /* White text color */
+    font-weight: bold;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+/* Hover effect for the close button */
+.closeBtn:hover {
+    background-color: #c9302c; /* Darker red on hover */
+}
+/* Styling for the close button */
+.closeBtn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: red;
+    position: absolute;
+    width: 25px;
+    border-radius: 3px;
+    align-self: self-end;
+    color: white
+}
+.ApprovedBtn, .ResolvedBtn
+{   position: absolute;
+    z-index: 112141678;
+    color: blanchedalmond;
+    width: fit-content;
+    padding: 2px;
+    padding-left: 4px;
+    padding-right: 4px;
+    border-radius: 3px;
+    margin-left: 5px;
+    font-weight: 200;
+    
+    background-color: rgb(255, 0, 51);
+    transition: all 1s;
+}
+
+.success{
+    background-color: rgb(19, 74, 19);
+    color: #ddd;
+}
+
+.filemsg
+{
+    background-color: #fff;
+    width: 300px;
+    height: 300px;
+    z-index: 13443098398;
+}
+#caseForm, .viewCaseForm {
+    max-width: 450px;
+    min-width: 250px;
+    /* width: 100%; */
+    padding: 10px;
+    background: linear-gradient(rgba(0, 0, 0, 0.46),rgba(0, 0, 228,0.6), black);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+    z-index:  20;
+    color: white;
+}
+.viewCaseForm{
+    position: fixed;
+    z-index: 1000;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: black;
+}
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    position:relative;
+    top: 0.6rem;
+    left: 0.5rem;
+    width:  fit-content;
+    font-size: 12px;
+    background: goldenrod;
+}
+
+input {    
+    background-color: transparent;
+    /* width: calc(100% - 16px); */
+    padding: 10px;
+    padding-top: 13px;
+    margin-bottom: 16px;
+    border: 1px solid greenyellow;
+    border-radius: 4px;
+    color: wheat;
+    transition: border-color 0.3s ease-in-out;
+}
+input:focus {
+    border-color: #4caf50;
+    background: white;
+    color: #0b0b0b;
+}
+#imageFields input {
+    margin-bottom: 8px;
+}
+
+button, .sub {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: #fff;
+    border: 1px solid greenyellow;
+}
+
+button:hover, .sub:hover {
+    background-color: green;
+    cursor: pointer;
 }
