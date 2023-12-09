@@ -47,7 +47,6 @@ h1 {
     cursor: pointer;
     transition: all .5s ease;
 }
-
 .buttonS:hover {
     background: linear-gradient(black, gold);
     border: 2px solid gray;
@@ -232,7 +231,7 @@ td {
     color: #fff;
     font-size: 16px;
     cursor: pointer;
-    border-radius: 30%;
+    border-radius: 10px;
     border: 3px ridge red;
     transition: background-color 0.3s ease-in-out;
 }
@@ -249,7 +248,7 @@ td {
     text-align: center;
     font-size: 20px;
     font-family: Georgia, 'Times New Roman', Times, serif;
-    padding: 20px;
+    padding: 10px;
     background-color: #025c06;
     color: white;
     position: fixed;
@@ -265,7 +264,7 @@ td {
     text-align: center;
     font-size: 20px;
     font-family: Georgia, 'Times New Roman', Times, serif;
-    padding: 20px;
+    padding: 10px;
     background-color: #872102;
     color: white;
     position: fixed;
@@ -300,7 +299,6 @@ background: linear-gradient(227deg, rgba(128, 128, 128), black);
     padding-bottom: 20px;
     max-width: 90vw;
     border: 2px solid black;
-
 }
 
 .fileDetailsGeneral p{

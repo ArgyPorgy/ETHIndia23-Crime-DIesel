@@ -1,3 +1,4 @@
+
 function showgoodAlert(message, duration) {
     const alertDiv = document.createElement('div');
     alertDiv.className = 'alert';
@@ -20,6 +21,7 @@ function showbadAlert(message, duration) {
     }, duration || 2000);
     return 0;
 }
+
 let a = false
 let x = 0
 var caseForm = document.getElementById("caseForm");
@@ -933,3 +935,4 @@ catch(error)
 
 
 }
+

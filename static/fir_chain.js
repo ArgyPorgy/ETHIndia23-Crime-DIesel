@@ -1,9 +1,11 @@
-const   submitFormButton = document.querySelector("#submitFormButton");
+// here too we wont use require instead we use window.ethereum
+
+const submitFormButton = document.querySelector("#submitFormButton");
 
 const web3 = new Web3(window.ethereum);
 
-
-const contractAddress = '0xa3E7B61477c5fca6C8eB6bEE1D8b536199a57914';  // new contract
+// const contractAddress = '0x27C717e5Ab809Ca63538bd7dA2DD5254e0ac6e84';  // Replace with your deployed contract address
+const contractAddress = '0xd9145CCE52D386f254917e481eB44e9943F39138'; //this is the new contract address made on (2/12/23) at 10pm
 const contractABI = [
 	{
 		"inputs": [],
@@ -459,9 +461,10 @@ const contractABI = [
 		"stateMutability": "nonpayable",
 		"type": "function"
 	}
-]
+]// Replace with your contract ABI // new abi at 10pm 
 
 const contract = new web3.eth.Contract(contractABI, contractAddress);
+
 async function storeFormDetails() {
 	const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
 	const accNo = accounts[0];
@@ -469,15 +472,12 @@ async function storeFormDetails() {
     const details = document.getElementById('details').value;
 
 	try {
-		
+		// Call the fileComplaint function on your smart contract
+		// const accounts = await window.web3.eth.getAccounts();
 		const result = await contract.methods.fileComplaint(name, details).send({
 		  from: accNo,
-		})
-        .on('transactionHash', function(hash) {
-            console.log('Transaction Hash:', hash);
-        })
-        .on('confirmation', function(confirmationNumber) {
-	
+		});
+		alert("good game!");
 		submitFormButton.disabled = false;
 		
 		if (confirmationNumber === 1) {
@@ -492,7 +492,7 @@ alert('payment confirmed');
         }
     });
 		// Handle success or update UI
-	  } catch (error) {
+	   catch (error) {
 		showbadAlert('Error filing complaint or Transation not complete !', 2000)
 		console.error("Error filing complaint:", error);
 		// Handle error or update UI
@@ -506,7 +506,7 @@ alert('payment confirmed');
 
 }
 submitFormButton.addEventListener("click", async function () {
-	await showgoodAlert('Wait till your Transation is processing. Please wait...', 2000);
+	await showgoodAlert('Complete your Transation. Please wait...', 2000);
 	submitFormButton.disabled = true;
 	const formContainer = document.getElementById("formContainer");
 	formContainer.classList.add("hidden");
