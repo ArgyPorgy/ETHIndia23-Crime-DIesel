@@ -3,7 +3,8 @@ const   submitFormButton = document.querySelector("#submitFormButton");
 const web3 = new Web3(window.ethereum);
 
 
-const contractAddress = '0xa3E7B61477c5fca6C8eB6bEE1D8b536199a57914';  // new contract
+const contractAddress = '0xd9145CCE52D386f254917e481eB44e9943F39138';  // new contract
+
 const contractABI = [
 	{
 		"inputs": [],

@@ -1,10 +1,16 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 from markupsafe import escape
+from dotenv import load_dotenv
 import subprocess
+import os
+
+load_dotenv()
+
 app = Flask(__name__)
 
 @app.route('/')
 def index():
+    privetkey = os.getenv('privetkey')
     return render_template('index.html')
 
 @app.route('/userpage.html')
@@ -26,6 +32,15 @@ def run_js():
     except subprocess.CalledProcessError as e:
         return f"Error: {e.stderr}"
 
+#push protocol route for chat
+@app.route('/run_chat_js')
+def run_chat_js():
+    try:
+        result = subprocess.run(['node', 'pushChat.mjs'], capture_output=True, text=True, check=True)
+        output = result.stdout.strip()
+        return f"Output from JavaScript: {output}"
+    except subprocess.CalledProcessError as e:
+        return f"Error: {e.stderr}"
 
 '''
 Note by soham:
@@ -62,7 +77,32 @@ def upload():
         print("error encountered! ")
     return redirect(url_for('org'))
 
+def displayLogo():
+    
+    art = '''
+                          
+    _____          _                        _____    _                       _   
+   / ____|        (_)                      |  __ \  (_)                     | |  
+  | |       _ __   _   _ __ ___     ___    | |  | |  _    ___   ___    ___  | |  
+  | |      | '__| | | | '_ ` _ \   / _ \   | |  | | | |  / _ \ / __|  / _ \ | |  
+  | |____  | |    | | | | | | | | |  __/   | |__| | | | |  __/ \__ \ |  __/ | |  
+   \_____| |_|    |_| |_| |_| |_|  \___|   |_____/  |_|  \___| |___/  \___| |_|  
 
+            Developed By:
+
+            * Arghya Chowdhury
+            * Devjyoti Banerjee
+            * Mayukh Sen
+            * Soham De
+            * Sayan Genri
+    
+    '''
+
+
+
+    print(art)
+    print("***Initiating Server***")
 
 if __name__ == '__main__':
+    displayLogo()
     app.run(debug=True,port = 8000)

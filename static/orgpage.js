@@ -49,8 +49,8 @@ function toggleCases() {
 }
 
 //Total web3.js part ->
-const web3 = new Web3("https://rpc.public.zkevm-test.net"); // Replace with the URL of your Ethereum 
-const contractAddress = '0x0bC497a90F7162DF42978B7c3a6014083393680E'; //this is the new contract address made on (9/12/23) at 3pm
+const web3 = new Web3("https://sepolia-rollup.arbitrum.io/rpc"); // Replace with the URL of your Ethereum 
+const contractAddress = '0xd9145CCE52D386f254917e481eB44e9943F39138'; //this is the new contract address made on (9/12/23) at 3pm
 const contractABI = [{
     "inputs": [],
     "stateMutability": "nonpayable",
@@ -507,7 +507,7 @@ const contractABI = [{
 }]// Replace with your contract ABI // new abi at 10pm  // Replace with the actual ABI of your contract
 
 async function searchCase(id) {
-	const web3 = new Web3("https://rpc-mumbai.maticvigil.com/");
+	const web3 = new Web3("https://sepolia-rollup.arbitrum.io/rpc");
 	const contract = new web3.eth.Contract(contractABI, contractAddress);
 	try {
 		const complaint = await contract.methods.alltheComplaints(id).call();
@@ -798,7 +798,7 @@ async function viewEvidences(firID)
 // this is a function that will call the viewEvidence fuction from solidity and 
 // give us the hashes seperated by a '-'
 // ekhon otakei ekta array e ante hobe :)
-const web3 = new Web3("https://rpc-mumbai.maticvigil.com/");
+const web3 = new Web3("https://sepolia-rollup.arbitrum.io/rpc");
 	const contract = new web3.eth.Contract(contractABI, contractAddress);
 	
 	try{
