@@ -1,3 +1,5 @@
+// 0x0bC497a90F7162DF42978B7c3a6014083393680E --> contract Address
+
 function showgoodAlert(message, duration) {
     const alertDiv = document.createElement('div');
     alertDiv.className = 'alert';
