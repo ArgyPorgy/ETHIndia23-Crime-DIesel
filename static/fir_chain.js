@@ -477,12 +477,12 @@ async function storeFormDetails() {
 		const result = await contract.methods.fileComplaint(name, details).send({
 		  from: accNo,
 		});
-		alert("good game!");
+		
 		submitFormButton.disabled = false;
 		
 		if (confirmationNumber === 1) {
             // The transaction is confirmed, and the receipt contains the newComplaint.id
-            
+            showgoodAlert("good game!", 2000);
             fetch("/run_js")
   .then((response) => response.text())
   .then((data) => console.log(data))
@@ -490,7 +490,8 @@ async function storeFormDetails() {
 alert('payment confirmed');
   // only notification is not coming
         }
-    });
+    
+	}
 		// Handle success or update UI
 	   catch (error) {
 		showbadAlert('Error filing complaint or Transation not complete !', 2000)
