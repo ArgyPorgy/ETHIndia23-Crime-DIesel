@@ -56,7 +56,8 @@ here i am saving the file objects in a location and then sending their
 address to the subprocess via Node js. The node js is uploading my file 
 to the lighthouse and returning its hash. 
 '''
-@app.route('/upload', methods=['GET', 'POST'])
+'''
+@app.route('/upload', methods=['POST'])
 
 def upload():
     
@@ -85,6 +86,8 @@ def upload():
         print("error encountered! ")
     return redirect(url_for('org'))
 
+'''
+start = False
 def displayLogo():
     global start
     art = '''
@@ -172,7 +175,7 @@ def process_hash():
 
 """
 
-
+'''
 #push protocol route
 @app.route('/run_js')
 def run_js():
@@ -182,6 +185,7 @@ def run_js():
         return f"Output from JavaScript: {output}"
     except subprocess.CalledProcessError as e:
         return f"Error: {e.stderr}"
+'''
 
 if __name__ == '__main__':
     displayLogo()
