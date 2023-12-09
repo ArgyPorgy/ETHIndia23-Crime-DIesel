@@ -7,7 +7,7 @@ import { ethers } from "ethers";
 // Creating a random signer from a wallet, ideally this is the wallet you will connect
 const privetkey = "980faad6ce73dd1be6d847fadee6a20e0c9137b237b0ccea5363f629a7a7ac74";
 const signer = new ethers.Wallet(`0x${privetkey}`);
-// s
+// js
 // Initialize wallet user
 // 'CONSTANTS.ENV.PROD' -> mainnet apps | 'CONSTANTS.ENV.STAGING' -> testnet apps
 const userAlice = await PushAPI.initialize(signer, { env: CONSTANTS.ENV.STAGING });
