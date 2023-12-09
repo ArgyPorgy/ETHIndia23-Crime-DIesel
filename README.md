@@ -11,3 +11,7 @@ This project aims to allow users to lodge an fir from their comfort zones using 
 #### create the solidity file and deploy the smart contact.
 
 #### create web3 functions for the smart contract and connect it with the frontend.
+
+### npm packages inatallation method:
+
+#### type: npm install @pushprotocol/restapi @pushprotocol/socket ethers @lighthouse-web3/sdk
