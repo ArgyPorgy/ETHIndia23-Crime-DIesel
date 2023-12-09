@@ -85,4 +85,47 @@ contract Complaint {
         officer = _address;
         emit OfficerChanged(_address);
     }
+     function resolve(uint _id, string memory _resolveStatement) public onlyOfficer returns (string memory){
+        ComplaintData storage currentComplaint = alltheComplaints[_id];
+        require (currentComplaint.exists, "Complaint does not exist");
+        require (currentComplaint.resolved == false, "complaint is already resolved");
+        currentComplaint.resolved = true;
+        emit ComplaintResolved(_id, _resolveStatement);
+
+        return "Case Resolved!";
+    }
+
+    function addEvidence(uint _id, string memory _evidence) public onlyOfficer {
+        ComplaintData storage currentComplaint = alltheComplaints[_id];
+        require(currentComplaint.exists, "Complaint does not exist");
+        currentComplaint.evidence = string(abi.encodePacked(currentComplaint.evidence, "-", _evidence));
+    }
+
+    function getEvidences(uint _id) public view returns (string memory) {
+        ComplaintData storage currentComplaint = alltheComplaints[_id];
+        require(currentComplaint.exists, "Complaint does not exist");
+
+        return currentComplaint.evidence;
+    }
+
+     function caseRegistration(string memory _name, string memory _description, string memory _evidenceHash) public returns (uint) {
+        ComplaintData memory newComplaint = ComplaintData({
+            id: idplus,
+            inCharge: msg.sender,
+            title: _name,
+            description: _description,
+            exists: true,
+            approved: false,
+            resolved: false,
+            approvalRemark: "pending",            evidence: _evidenceHash
+        });
+
+        alltheComplaints[idplus] = newComplaint;
+        ++idplus;
+
+        emit DataStored(newComplaint.id, _name, _description, _evidenceHash);
+
+        return newComplaint.id;
+    }
+    
 }
