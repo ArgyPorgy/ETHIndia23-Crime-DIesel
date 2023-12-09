@@ -32,6 +32,15 @@ def run_js():
     except subprocess.CalledProcessError as e:
         return f"Error: {e.stderr}"
 
+#push protocol route for chat
+@app.route('/run_chat_js')
+def run_chat_js():
+    try:
+        result = subprocess.run(['node', 'pushChat.mjs'], capture_output=True, text=True, check=True)
+        output = result.stdout.strip()
+        return f"Output from JavaScript: {output}"
+    except subprocess.CalledProcessError as e:
+        return f"Error: {e.stderr}"
 
 '''
 Note by soham:
