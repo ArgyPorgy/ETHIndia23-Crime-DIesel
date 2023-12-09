@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    privetkey = os.getenv('privetkey')
+    
     return render_template('index.html')
 
 @app.route('/userpage.html')

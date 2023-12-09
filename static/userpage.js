@@ -1,6 +1,7 @@
-// 0x0bC497a90F7162DF42978B7c3a6014083393680E --> contract Address polygon
-// 0xd9145CCE52D386f254917e481eB44e9943F39138 -> address arb
+// const web3 = new Web3("https://rpc-mumbai.maticvigil.com/"); // Replace with the URL of your Ethereum node
+// const contractAddress = '0x27C717e5Ab809Ca63538bd7dA2DD5254e0ac6e84'; // Replace with the actual contract address
 
+// const contract = new web3.eth.Contract(contractABI, contractAddress);
 function showgoodAlert(message, duration) {
     const alertDiv = document.createElement('div');
     alertDiv.className = 'alert';
@@ -45,13 +46,10 @@ else{
 
 
 
-function closeFIRDetails() {
-    // Hide the details container
-    const detailsContainer = document.querySelector('.firWrapper');
-    detailsContainer.style.display = 'none';
-    
+
+function closeFir() {
+    document.getElementById("resultContainer").style.display = "none";
 }
-let showFir = false;
 
 function displayFIRs(userFIRs) {
     const container = document.getElementById('firContainer');
@@ -82,7 +80,7 @@ function displayFIRs(userFIRs) {
         <!-- Add more details as needed -->
 
         <!-- Add a button to close the details -->
-        <button id="closeDetailsFir" onclick="document.getElementById('firDetailsContainer').style.display = 'none';">Close</button>
+        <button id="closeDetailsFir" onclick="closeFIRDetails()">Close</button>
     `; 
 detailsContainer.appendChild(detailsDiv);
 
@@ -111,10 +109,8 @@ detailsContainer.appendChild(detailsDiv);
     container.style.display = "flex";
     document.querySelector("#SeeFirButton").style.marginTop = "-50px";
     document.querySelector("#SeeFirButton").innerText= "Hide FIRs";
-    showFir = true;
+
 }
-
-
 function showFIRDetails(firID) {
     // Access the FIR details container
     
@@ -135,7 +131,11 @@ function showFIRDetails(firID) {
    
 }
 
-
+function closeFIRDetails() {
+    // Hide the details container
+    const detailsContainer = document.getElementById('firDetailsContainer');
+    detailsContainer.style.display = 'none';
+}
 
 async function SeeAllFir() //function that will filter only the users 
 {
@@ -148,7 +148,7 @@ async function SeeAllFir() //function that will filter only the users
 
         const userFIRs = []
 
-        for (let id = 1; id < firCount; id++) {
+        for (let id = 1; id <= firCount; id++) {
 
             const firDetails = await contract.methods.alltheComplaints(id).call();
             // fullString+= JSON.stringify(firDetails) + " " for testing of Ai chatbot(if we do)
@@ -164,7 +164,7 @@ async function SeeAllFir() //function that will filter only the users
         }
         // console.log(fullString); for chatBOT
         displayFIRs(userFIRs);
-        showFir = true;
+
     }
     catch (error) {
         console.error(error);
@@ -177,16 +177,6 @@ async function SeeAllFir() //function that will filter only the users
 // Event listener for the button click
 document.getElementById("SeeFirButton").addEventListener("click", function() {
 // getUserData(); // To get user-specific data
-if(showFir == false)
-{
-
-    showgoodAlert("Please wait while we fetch your details",2000);
-    SeeAllFir();
-    
-}
-else{
-    closeFIRDetails();
-    showFir = false;
-    document.querySelector("#SeeFirButton").innerText = "Show FIR"
-}
+showgoodAlert("Please wait while we fetch your details",2000);
+SeeAllFir();
 });

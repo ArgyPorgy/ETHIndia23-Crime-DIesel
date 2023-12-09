@@ -2,9 +2,20 @@
 import { PushAPI, CONSTANTS } from "@pushprotocol/restapi";
 import { ethers } from "ethers";
 
+// server.js
+import dotenv from 'dotenv';
+
+// Load environment variables from .env file
+dotenv.config();
+
+const privatekey = process.env.privetkey;
+
+// Now you can use apiKey in your Node.js code
+
+
 // Creating a random signer from a wallet, ideally this is the wallet you will connect
-const privetkey = "980faad6ce73dd1be6d847fadee6a20e0c9137b237b0ccea5363f629a7a7ac74";
-const signer = new ethers.Wallet(`0x${privetkey}`);
+
+const signer = new ethers.Wallet(`0x${privatekey}`);
 
 
 // Initialize wallet user
