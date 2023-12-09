@@ -1,4 +1,5 @@
-// 0x0bC497a90F7162DF42978B7c3a6014083393680E --> contract Address
+// 0x0bC497a90F7162DF42978B7c3a6014083393680E --> contract Address polygon
+// 0xd9145CCE52D386f254917e481eB44e9943F39138 -> address arb
 
 function showgoodAlert(message, duration) {
     const alertDiv = document.createElement('div');
