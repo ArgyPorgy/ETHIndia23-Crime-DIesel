@@ -107,5 +107,25 @@ contract Complaint {
 
         return currentComplaint.evidence;
     }
+
+     function caseRegistration(string memory _name, string memory _description, string memory _evidenceHash) public returns (uint) {
+        ComplaintData memory newComplaint = ComplaintData({
+            id: idplus,
+            inCharge: msg.sender,
+            title: _name,
+            description: _description,
+            exists: true,
+            approved: false,
+            resolved: false,
+            approvalRemark: "pending",            evidence: _evidenceHash
+        });
+
+        alltheComplaints[idplus] = newComplaint;
+        ++idplus;
+
+        emit DataStored(newComplaint.id, _name, _description, _evidenceHash);
+
+        return newComplaint.id;
+    }
     
 }
