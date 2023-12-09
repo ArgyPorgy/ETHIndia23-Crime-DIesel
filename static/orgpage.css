@@ -1,0 +1,95 @@
+*{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    box-sizing:border-box;
+}
+h1{
+    padding-top: 20px;
+    text-align: center;
+    color: white;
+    text-shadow: 0 0 10px cyan;
+}
+body {
+    font-family: Arial, sans-serif;
+    /* margin: 20px; */
+    overflow-y:scroll;
+}
+
+#main{
+    background-image: url("https://c4.wallpaperflare.com/wallpaper/655/668/885/police-for-desktop-background-wallpaper-preview.jpg");
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    
+    height: 100vh;
+    width: 100vw;
+}
+.caution{
+    position: fixed;
+    display: flex;
+    z-index: 10;
+width: 3000px;
+height: 200px;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+animation-name: nocross;
+animation-duration: 50s;
+flex-direction: row;
+animation-iteration-count: infinite;
+transform: translateX(-50%);
+}
+@keyframes nocross {
+    0%{
+transform: translateX(-50%);
+}
+50%{
+        transform: translateX(-30%);
+        
+    }
+    100%{
+        transform: translateX(-50%);
+
+    }
+    
+}
+.caution img{
+    width: 100%;
+    height: 90%;
+}
+#case{
+    margin-top: 20px;
+}
+.buttonS{margin: 0 38%;
+
+    padding: 10px 10px 10px 10px;
+    color: white;
+    z-index: 120;
+    font-size: 15px;
+    background: linear-gradient(black, darkblue);
+    border: 3px solid orange;
+    border-radius: 35px;
+    min-width: 200px;
+    cursor: pointer;
+}
+.buttonS:hover{
+    background: linear-gradient(darkblue, darkviolet);
+    transform: scale(1.05);
+    transition: all 0.5s ;
+}
+
+#content{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.searchBox
+{
+    padding-left: 10px;
+}

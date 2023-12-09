@@ -1,12 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Organisation Page</title>
-</head>
-<body>
-    <h1>Hello, ETHIndia!</h1>
-    <p>gm ETHIndia</p>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Case Registration</title>
+    <link rel="stylesheet" href="/static/orgpage.css" />
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.3.6/dist/web3.min.js"></script>
+  </head>
+  <body> 
+    <div id="main">
+      <div class="caution">
+        <img src="/static/—Pngtree—police caution tape_8215260.png" alt="" />
+        <img src="/static/—Pngtree—police caution tape_8215260.png" alt="" />
+        <img src="/static/—Pngtree—police caution tape_8215260.png" alt="" />
+        <img src="/static/—Pngtree—police caution tape_8215260.png" alt="" />
+        <img src="/static/—Pngtree—police caution tape_8215260.png" alt="" />
+        <img src="/static/—Pngtree—police caution tape_8215260.png" alt="" />
+        <img src="/static/—Pngtree—police caution tape_8215260.png" alt="" />
+        <img src="/static/—Pngtree—police caution tape_8215260.png" alt="" />
+        <img src="/static/—Pngtree—police caution tape_8215260.png" alt="" />
+        <img src="/static/—Pngtree—police caution tape_8215260.png" alt="" />
+        <img src="/static/—Pngtree—police caution tape_8215260.png" alt="" />
+      </div>
+      <h1>Login as Higher Authority</h1>
+      <div id="content">
+        <button class="buttonS" onclick="openCaseForm()">Register Case</button>
+        <div id="caseForm" style="display:none;">
+          <form
+            action="#"
+            method="post"
+            id="registerForm"
+            enctype="multipart/form-data"
+          >
+            <label for="name">TITLE:</label>
+            <input type="text" id="name" name="name" required />
+
+            <label for="description">DESCRIPTION:</label>
+            <input
+              type="text"
+              id="description"
+              name="description"
+              required
+            /><br />
+
+            <label for="image">IMAGE:</label>
+            <input
+              type="file"
+              id="image"
+              name="imageObj"
+              accept="image/*"
+              required
+            />
+            <button type="button" onclick="addImageField()">Add More</button
+            ><br />
+
+            <div id="imageFields"></div>
+
+            <button type="submit" id="submitcase">Submit</button>
+          </form>
+        </div>
+        <br />
+      <button class="buttonS">Update Case</button>
+
+      <br />
+      <button class="buttonS" onclick="toggleCases();">View Case</button>
+      </div>
+      <div class="viewCaseForm" style="display: none">
+        <form action="#" method="GET">
+          <label> Enter the Case ID: </label>
+          <input
+            id="searchBox"
+            name="searchBox"
+            type="number"
+          />
+          <!-- <label for="searchBox">Search for the FIR:</label> -->
+          <input
+            type="submit" 
+            class="sub"
+            placeholder="Search"
+            onclick="findCase(event); "
+          />
+        </form>
+      </div>
+
+      <div id="resultContainer" style="display: none">
+        <!-- Display the result here -->
+      </div>
+    </div>
+    <script src="{{ url_for('static', filename='orgpage.js') }}"></script>
+    <script>
+      async function displayFileMessage() {
+        document.querySelector(".filemsg").style.display = "block";
+      }
+    </script>
+  </body>
 </html>
