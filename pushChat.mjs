@@ -29,7 +29,7 @@ const signerBobAddress = "0x998F8Fca5845908E83FFe299b98eC3F5c05b3093";
 
 // Send a message to Bob
 const aliceMessagesBob = await userAlice.chat.send(signerBobAddress, {
-  content: "Gm gm! It's a me... Mario",
+  content: "Need help",
 });
 
 // Initialize Stream
