@@ -1,0 +1,67 @@
+type ComplaintApproved @entity(immutable: true) {
+  id: Bytes!
+  graph_query_id: BigInt! # uint256
+  officer: Bytes! # address
+  approvalRemark: String! # string
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ComplaintFiled @entity(immutable: true) {
+  id: Bytes!
+  graph_query_id: BigInt! # uint256
+  inCharge: Bytes! # address
+  title: String! # string
+  description: String! # string
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ComplaintRejected @entity(immutable: true) {
+  id: Bytes!
+  graph_query_id: BigInt! # uint256
+  officer: Bytes! # address
+  rejectionRemark: String! # string
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ComplaintResolved @entity(immutable: true) {
+  id: Bytes!
+  graph_query_id: BigInt! # uint256
+  resolveStatement: String! # string
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type DataStored @entity(immutable: true) {
+  id: Bytes!
+  graph_query_id: BigInt! # uint256
+  name: String! # string
+  description: String! # string
+  hashlight: String! # string
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type OfficerChanged @entity(immutable: true) {
+  id: Bytes!
+  officer: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type gotEvidence @entity(immutable: true) {
+  id: Bytes!
+  graph_query_id: BigInt! # uint256
+  mainEvidence: String! # string
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

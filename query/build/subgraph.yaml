@@ -1,0 +1,42 @@
+specVersion: 0.0.5
+schema:
+  file: schema.graphql
+dataSources:
+  - kind: ethereum
+    name: graph_query
+    network: mumbai
+    source:
+      address: "0x62B6EE500AF2A4f92052cb8b43129F91D584Cce3"
+      abi: graph_query
+      startBlock: 43386895
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - ComplaintApproved
+        - ComplaintFiled
+        - ComplaintRejected
+        - ComplaintResolved
+        - DataStored
+        - OfficerChanged
+        - gotEvidence
+      abis:
+        - name: graph_query
+          file: graph_query\abis\graph_query.json
+      eventHandlers:
+        - event: ComplaintApproved(indexed uint256,indexed address,string)
+          handler: handleComplaintApproved
+        - event: ComplaintFiled(indexed uint256,indexed address,string,string)
+          handler: handleComplaintFiled
+        - event: ComplaintRejected(indexed uint256,indexed address,string)
+          handler: handleComplaintRejected
+        - event: ComplaintResolved(indexed uint256,string)
+          handler: handleComplaintResolved
+        - event: DataStored(indexed uint256,string,string,string)
+          handler: handleDataStored
+        - event: OfficerChanged(indexed address)
+          handler: handleOfficerChanged
+        - event: gotEvidence(indexed uint256,string)
+          handler: handlegotEvidence
+      file: graph_query\graph_query.wasm
