@@ -144,10 +144,10 @@ async function SeeAllFir() //function that will filter only the users
     // let fullString = ""
     try {
         const firCount = await contract.methods.idplus().call();
-
+        console.log(firCount)
         const userFIRs = []
 
-        for (let id = 1; id <= firCount; id++) {
+        for (let id = 1; id < firCount; id++) {
 
             const firDetails = await contract.methods.alltheComplaints(id).call();
             // fullString+= JSON.stringify(firDetails) + " " for testing of Ai chatbot(if we do)

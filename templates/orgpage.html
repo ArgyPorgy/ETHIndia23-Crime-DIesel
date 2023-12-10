@@ -27,7 +27,7 @@
         <button class="buttonS" onclick="openCaseForm()">Register Case</button>
         <div id="caseForm" style="display: none">
           <form
-            action="{{ url_for('upload') }}"
+            action="{{url_for('upload')}}"
             method="post"
             id="registerForm"
             enctype="multipart/form-data"

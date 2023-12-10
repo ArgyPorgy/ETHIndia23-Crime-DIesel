@@ -51,8 +51,8 @@ function toggleCases() {
 }
 
 //Total web3.js part ->
-const web3 = new Web3("https://rpc.public.zkevm-test.net"); // Replace with the URL of your Ethereum 
-const contractAddress = '0xa3E7B61477c5fca6C8eB6bEE1D8b536199a57914'; //this is the new contract address made on (9/12/23) at 3pm
+const web3 = new Web3("https://rpc-mumbai.maticvigil.com/"); // Replace with the URL of your Ethereum 
+const contractAddress = '0x62B6EE500AF2A4f92052cb8b43129F91D584Cce3'; //this is the new contract address made on (9/12/23) at 3pm
 const contractABI = [{
     "inputs": [],
     "stateMutability": "nonpayable",
@@ -509,7 +509,7 @@ const contractABI = [{
 }]// Replace with your contract ABI // new abi at 10pm  // Replace with the actual ABI of your contract
 
 async function searchCase(id) {
-	const web3 = new Web3("https://rpc.public.zkevm-test.net");
+	const web3 = new Web3("https://rpc-mumbai.maticvigil.com/");
 	const contract = new web3.eth.Contract(contractABI, contractAddress);
 	try {
 		const complaint = await contract.methods.alltheComplaints(id).call();
@@ -725,48 +725,6 @@ function addImageField() {
 //working
 
 
-/*
-        function sendMainData(event)
-        {
-            event.preventDefault();
-            console.log("submitted");
-            const name = document.getElementById("name").value;
-            const description = document.getElementById("description").value;
-            fetch("/process_hash", {
-                method: "GET",
-                body: new FormData(this),
-              })
-                .then((response) => response.json())
-                .then((data) => {
-                  // Access the hashArray directly
-                  const hashArray = data.hashArray;
-                  
-                    
-                  // Now you can use the hashArray in your JavaScript code
-                  console.log("processed hash you: ", hashArray); // to check
-                    let hashString = "";
-                  for(let i =0 ; i<hashArray.length; i++)
-                  {
-                    
-                    hashString+=hashArray[i];
-                    if(i+1 != hashArray.length)
-                    {
-                        hashString+="-";
-                        //to seperate the values;
-                    }
-                  }
-                  
-                   sendCaseRegistration(name, description, hashString);
-                  
-    
-                })
-                .catch((error) => {
-                  console.error("Error:", error);
-                });
-
-        }
-
-*/
 
 async function sendCaseRegistration(name, description, hashString)
 {
@@ -810,7 +768,7 @@ document.getElementById("registerForm")
         .addEventListener("submit", function(event) {
           event.preventDefault();
 
-          fetch("/process_hash", {
+          fetch("/upload", {
             method: "POST",
             body: new FormData(this),
           })
@@ -901,7 +859,7 @@ async function viewEvidences(firID)
 // this is a function that will call the viewEvidence fuction from solidity and 
 // give us the hashes seperated by a '-'
 // ekhon otakei ekta array e ante hobe :)
-const web3 = new Web3("https://rpc.public.zkevm-test.net");
+const web3 = new Web3("https://rpc-mumbai.maticvigil.com/");
 	const contract = new web3.eth.Contract(contractABI, contractAddress);
 	
 	try{

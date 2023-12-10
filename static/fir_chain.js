@@ -5,7 +5,7 @@ const submitFormButton = document.querySelector("#submitFormButton");
 const web3 = new Web3(window.ethereum);
 
 // const contractAddress = '0x27C717e5Ab809Ca63538bd7dA2DD5254e0ac6e84';  // Replace with your deployed contract address
-const contractAddress = '0xd9145CCE52D386f254917e481eB44e9943F39138'; //this is the new contract address made on (2/12/23) at 10pm
+const contractAddress = '0x62B6EE500AF2A4f92052cb8b43129F91D584Cce3'; //this is the new contract address made on (2/12/23) at 10pm
 const contractABI = [
 	{
 		"inputs": [],
