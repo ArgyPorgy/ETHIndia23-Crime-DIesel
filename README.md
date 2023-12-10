@@ -2,6 +2,7 @@
 
 This project aims to allow users to lodge an fir from their comfort zones using a decentralised approach. The repository contains instructions for completing the basic framework of the frontend, linking MetaMask with page redirection, and creating and deploying a Solidity file for the smart contract. It also guides on creating web3 functions to connect the smart contract with the frontend. Additionally, it includes a method for installing npm packages specific to the project. 
 
+
 ### Algorithm for the use (only for the team)
 
 #### complete the basic frame of the frontend and then use styling.
