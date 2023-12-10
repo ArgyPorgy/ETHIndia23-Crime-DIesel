@@ -51,8 +51,8 @@ function toggleCases() {
 }
 
 //Total web3.js part ->
-const web3 = new Web3("https://rpc.public.zkevm-test.net"); // Replace with the URL of your Ethereum 
-const contractAddress = '0xa3E7B61477c5fca6C8eB6bEE1D8b536199a57914'; //this is the new contract address made on (9/12/23) at 3pm
+const web3 = new Web3("https://rpc-mumbai.maticvigil.com/"); // Replace with the URL of your Ethereum 
+const contractAddress = '0x62B6EE500AF2A4f92052cb8b43129F91D584Cce3'; //this is the new contract address made on (9/12/23) at 3pm
 const contractABI = [{
     "inputs": [],
     "stateMutability": "nonpayable",
@@ -509,7 +509,7 @@ const contractABI = [{
 }]// Replace with your contract ABI // new abi at 10pm  // Replace with the actual ABI of your contract
 
 async function searchCase(id) {
-	const web3 = new Web3("https://rpc.public.zkevm-test.net");
+	const web3 = new Web3("https://rpc-mumbai.maticvigil.com/");
 	const contract = new web3.eth.Contract(contractABI, contractAddress);
 	try {
 		const complaint = await contract.methods.alltheComplaints(id).call();
@@ -609,8 +609,13 @@ function displayEvidences(evidenceArray)
     // Iterate over the evidenceArray and create list items
     evidenceArray.forEach((hash, index) => {
         const listItem = document.createElement('li');
+        if(hash.length != 0){
         listItem.innerHTML = `<a style="color: white;" href="https://gateway.lighthouse.storage/ipfs/${hash}" target="_blank">Evidence ${index+1}</a>`;
-        evilist.appendChild(listItem);
+        }
+        else{
+            listItem.innerHTML = "No evidence";
+            evilist.appendChild(listItem);
+        }
     });
 	document.querySelector('.evidenceContainer').style.display = "block";
 }
@@ -901,7 +906,7 @@ async function viewEvidences(firID)
 // this is a function that will call the viewEvidence fuction from solidity and 
 // give us the hashes seperated by a '-'
 // ekhon otakei ekta array e ante hobe :)
-const web3 = new Web3("https://rpc.public.zkevm-test.net");
+const web3 = new Web3("https://rpc-mumbai.maticvigil.com/");
 	const contract = new web3.eth.Contract(contractABI, contractAddress);
 	
 	try{
