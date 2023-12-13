@@ -47,7 +47,7 @@ else{
 
 
 function closeFir() {
-    document.getElementById("resultContainer").style.display = "none";
+    document.getElementById("firContainer").style.display = "none";
 }
 
 function displayFIRs(userFIRs) {
@@ -172,10 +172,19 @@ async function SeeAllFir() //function that will filter only the users
 }
 
 
-
+let showFir = false;
 // Event listener for the button click
 document.getElementById("SeeFirButton").addEventListener("click", function() {
 // getUserData(); // To get user-specific data
-showgoodAlert("Please wait while we fetch your details",2000);
-SeeAllFir();
+if(showFir == false)
+{   showFir = true;
+    showgoodAlert("Please wait while we fetch your details",2000);
+    SeeAllFir();
+}
+else{
+showFir = false;
+document.querySelector("#SeeFirButton").innerText = "Show FIR";
+closeFir();
+}
+
 });
