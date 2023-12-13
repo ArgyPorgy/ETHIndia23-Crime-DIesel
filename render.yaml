@@ -1,2 +1,4 @@
 version: 1
 buildCommand: ./build.sh
+cache:
+  - node_modules
