@@ -609,13 +609,12 @@ function displayEvidences(evidenceArray)
     // Iterate over the evidenceArray and create list items
     evidenceArray.forEach((hash, index) => {
         const listItem = document.createElement('li');
-        if(hash.length != 0){
+        
         listItem.innerHTML = `<a style="color: white;" href="https://gateway.lighthouse.storage/ipfs/${hash}" target="_blank">Evidence ${index+1}</a>`;
-        }
-        else{
-            listItem.innerHTML = "No evidence";
+        
+            // listItem.innerHTML = "No evidence";
             evilist.appendChild(listItem);
-        }
+        
     });
 	document.querySelector('.evidenceContainer').style.display = "block";
 }
