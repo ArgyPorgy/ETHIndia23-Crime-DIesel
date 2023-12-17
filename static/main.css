@@ -336,6 +336,44 @@ button:hover{
 }
 
 
+@media (max-width: 550px){
+    header .logo{
+        font-size: 25px;
+        position: absolute;
+        bottom: -6px;
+        left: 5%;
+    }
+    .container{
+        margin: 8% 8%;
+    }
+    .container .content h2, .container .content h2 span{
+        font-size: 30px;
+        line-height: 25px;
+    }
+    .container .content p, login p, .intro p{
+        font-size: 18px;
+    }
+    .login{
+        flex-direction: column;
+    }
+}
+@media (min-width: 551px) and (max-width: 750px){
+    header .logo{
+        font-size: 30px;
+        position: absolute;
+        bottom: -6px;
+    }
+    .container{
+        margin: 8% 8%;
+    }
+    .container .content h2, .container .content h2 span{
+        font-size: 35px;
+        line-height: 30px;
+    }
+    .container .content p, .intro p{
+        font-size: 20px;
+    }
+}
 @media (min-width: 961px){
     .photo img{
         min-width: 200px;
